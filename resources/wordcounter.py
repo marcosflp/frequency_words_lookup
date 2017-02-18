@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
+import time
 from flask import request
 from flask_restful import Resource
 from lxml import html
@@ -38,6 +39,7 @@ class WordCounterApi(Resource):
             response = requests.request(http_verb, uri)
         except Exception as e:
             # retry once, it could be a momentary overloaded server?
+            time.sleep(3)
             try:
                 response = requests.request(http_verb, uri)
             except Exception as e:
