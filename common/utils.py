@@ -22,3 +22,9 @@ def is_valid_uri(uri):
         return True
     else:
         return False
+
+
+def clean_word(word):
+    cleaned_word = re.sub('[^A-Za-z]+', '', word)
+
+    return cleaned_word
