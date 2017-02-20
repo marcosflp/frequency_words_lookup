@@ -6,7 +6,7 @@ from flask import request
 from flask_restful import Resource
 from lxml import html
 from stop_words import get_stop_words
-from common.utils import is_valid_uri, clean_word
+from common.utils import is_valid_uri
 
 
 class WordCounterApi(Resource):
@@ -61,9 +61,8 @@ class WordCounterApi(Resource):
         stop_words = get_stop_words('portuguese')
         word_list = []
         for w in text.replace('\n', ' ').strip().split():
-            cleaned_w = clean_word(w)
-            if cleaned_w not in stop_words:
-                word_list.append(cleaned_w)
+            if w not in stop_words:
+                word_list.append(w)
 
         return [w for w in word_list if search_word.lower() in w.lower()]
 
