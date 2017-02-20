@@ -19,10 +19,10 @@ class WordCounterApi(Resource):
 
     def get(self):
         response = self.get_response_from_uri('GET', request.args.get('uri'))
-        words_found_list = self.get_words(response.content, request.args.get('word'))
-
         if self.error.get('error'):
             return self.error_handler()
+
+        words_found_list = self.get_words(response.content, request.args.get('word'))
 
         return {'uri': request.args.get('uri'),
                 'word': request.args.get('word') or '',
